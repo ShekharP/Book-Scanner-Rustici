@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Book Scanner</string>
+    <string name="scan">Scan</string>
+    <string name="history">History</string>
+    <string name="noNetwork">There is no Network Connection, cannot complete tasks.</string>
+    <string name="noNetworkISBN">There is no network connection, cannot upload ISBN.</string>
+    <string name="bookFailed">The ISBN is invalid</string>
+    <string name="textName">Name</string>
+    <string name="textAppId">Username</string>
+    <string name="textSecretKey">Password</string>
+    <string name="textIsbn">ISBN</string>
+    <string name="textTitle">Title</string>
+    <string name="textAuthors">Authors</string>
+    <string name="textUploaded">Uploaded</string>
+    <string name="textYes">Yes</string>
+    <string name="textNo">No</string>
+    <string name="textUpload">Upload</string>
+    <string name="textDelete">Delete</string>
+    <string name="requestInProgress">A request is currently in progress, please wait</string>
+    <string name="successfulUpload">The book has been successfully uploaded</string>
+    <string name="unsuccessfulUpload">The book could not be uploaded to the LRS</string>
+    <string name="progressTitle">Working...</string>
+    <string name="progressText">Uploading Data</string>
+    <string name="toastPostFailed">The network connection has been interrupted, cannot complete task</string>
+    <string name="save">Save</string>
+    <string name="menuConfig">Configure Endpoint</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="dialogConfigure">Configure</string>
+    <string name="dialogUsername">Username for:</string>
+    <string name="textEmail">E-Mail</string>
+    <string name="dialogCredentials">Input Information</string>
+    <string name="textEndpoint">Endpoint</string>
+    <string name="menuClear">Clear Actor</string>
+    <string name="textRemind">Remind Me Later</string>
+    <string name="toastUploadBook">Upload reminder for</string>
+    <string name="toastUploadReminder">Remember to upload your books!</string>
+    <string name="errorISBNNotScanned">Scanner expected an ISBN-13 Barcode</string>
+</resources>

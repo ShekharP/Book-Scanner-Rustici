@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="25"
+                    android:text="@string/textEmail" />
+
+                <EditText
+                    android:id="@+id/editEmailFull"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="75"
+                    android:inputType="textEmailAddress" >
+
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="25"
+                    android:text="@string/textName" />
+
+                <EditText
+                    android:id="@+id/editNameFull"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="75" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonExtendedLoginSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

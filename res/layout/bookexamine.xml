@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="25"
+                    android:text="@string/textIsbn" />
+
+                <TextView
+                    android:id="@+id/textIsbn"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="75"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="25"
+                    android:text="@string/textTitle" />
+
+                <TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="75"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="25"
+                    android:text="@string/textAuthors" />
+
+                <TextView
+                    android:id="@+id/textAuthors"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="75"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv4"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="25"
+                    android:text="@string/textUploaded" />
+
+                <TextView
+                    android:id="@+id/textUploaded"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="75"
+                    android:text="0" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonUpload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textUpload" />
+
+            <Button
+                android:id="@+id/buttonRemindExamine"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textRemind" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textDelete" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

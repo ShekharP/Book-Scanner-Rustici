@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+*.apk
 
 # Packages #
 ############
@@ -36,3 +37,8 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# Android Generated Files #
+######################
+gen/
+bin/
