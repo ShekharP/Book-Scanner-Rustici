@@ -1070,7 +1070,8 @@ public class BookScannerActivity extends Activity implements
 
 				((HttpURLConnection) connection).setRequestProperty(
 						"Authorization", basicAuthHeader);
-				String postData = createJSON(data);
+				String postData = createJSON095(data);
+				
 				Log.i("DATA LENGTH", postData.getBytes("UTF-8").length + "");
 
 				if (postData != null) {
@@ -1079,6 +1080,7 @@ public class BookScannerActivity extends Activity implements
 							"application/json");
 					connection.setRequestProperty("Content-Length", ""
 							+ Integer.toString(postData.getBytes("UTF-8").length));
+					connection.setRequestProperty("X-Experience-API-Version", "0.95");
 					DataOutputStream wr = new DataOutputStream(
 							connection.getOutputStream());
 					try {
@@ -1159,7 +1161,7 @@ public class BookScannerActivity extends Activity implements
 		 * @param book
 		 * @return
 		 */
-		private String createJSON(Book book) {
+		private String createJSON090(Book book) {
 			StringBuilder json = new StringBuilder();
 			String auth = book.getAuthors().trim();
 			// ISBNDB usually returns a comma-delimited list.  And it ends in a comma.  Sometimes.
@@ -1179,6 +1181,54 @@ public class BookScannerActivity extends Activity implements
 				json.append("\"verb\":\"");
 				json.append("completed");
 				json.append("\",");
+			
+				json.append("\"object\":{");
+					json.append("\"objectType\":\"Activity\",");
+					json.append("\"id\":\"");
+					json.append(book.getTitle());
+					json.append("\",");
+					json.append("\"definition\":{");
+						json.append("\"name\":{\"en-US\":\"");
+						json.append(book.getTitle());
+						json.append("\"},");
+						json.append("\"description\":{\"en-US\":\"");
+						json.append(authors[0]);
+						for (int i = 1; i < authors.length - 1; i++) { // All ISBNDB books end with an empty author
+							json.append(",");
+							json.append(authors[i]);
+						}
+						json.append("\"}");
+						// json.append("\"description\":{\"en-US\":\"" + book.getSummary() + "\"}");
+					json.append("}");
+				json.append("},");
+				json.append("\"context\" : { ");
+					json.append("\"extensions\" : {");
+						json.append("\"verb\" : \"read\"");
+					json.append("}");
+				json.append("}");
+			json.append("}]");
+			// Log.i("JSON", json.toString());
+			return json.toString();
+		}
+		
+		private String createJSON095(Book book) {
+			StringBuilder json = new StringBuilder();
+			String auth = book.getAuthors().trim();
+			// ISBNDB usually returns a comma-delimited list.  And it ends in a comma.  Sometimes.
+			auth = auth.charAt(auth.length() - 1) == ',' ? auth.substring(0, auth.length() - 1) : auth;
+			String[] authors = book.getAuthors().split(",");
+			
+			// Do not use String Concat in Android.  A lot of the weaker phones will suffer heavily from it
+			json.append("[{");
+				json.append("\"actor\":{");
+					json.append("\"name\":\"");
+					json.append(userName);
+					json.append("\"");
+					json.append(",\"mbox\":\"mailto:");
+					json.append(userEmail);
+					json.append("\"");
+				json.append("},");
+				json.append("\"verb\":{\"id\":\"http://adlnet.gov/expapi/verbs/completed\",\"display\": { \"en-US\" : \"completed\"}},");
 			
 				json.append("\"object\":{");
 					json.append("\"objectType\":\"Activity\",");

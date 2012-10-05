@@ -42,3 +42,6 @@ Thumbs.db
 ######################
 gen/
 bin/
+.classpath
+
+lint.xml
