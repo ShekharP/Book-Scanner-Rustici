@@ -1206,8 +1206,7 @@ public class BookScannerActivity extends Activity implements
 				json.append("}");
 			json.append("}]");
 			// Log.i("JSON", json.toString());
-			// TODO: Add unicode support to the post
-			return json.toString().replaceAll("[^\\x20-\\x7e]", ""); // Remove all non-ASCII characters to avoid errors
+			return json.toString();
 		}
 	}
 	
