@@ -89,6 +89,7 @@ public class BookScannerActivity extends Activity implements
 	PostToCloud postToCloud;
 	NotificationManager notificationManager;
 	Dialog userDialog;
+	TCAPIVersion version = TCAPIVersion.TinCan095;
 
 	String endpoint;
 	String appId;
@@ -726,6 +727,7 @@ public class BookScannerActivity extends Activity implements
 	 * Called when postToCloud finishes
 	 */
 	public void postToCloudFinished(Book data) {
+		if (data == null) return;
 		postToCloud = null;
 		addBook(data);
 		buttonHistory.setClickable(books.size() != 0);
@@ -1009,6 +1011,8 @@ public class BookScannerActivity extends Activity implements
 		String secretKey;
 		String userName;
 		String userEmail;
+		boolean versionChanged;
+		
 		
 		public BookScannerActivity getActivity() {
 			return activity;
@@ -1053,11 +1057,12 @@ public class BookScannerActivity extends Activity implements
 
 			ByteArrayOutputStream responseBytes = new ByteArrayOutputStream();
 			InputStream responseStream = null;
-			URLConnection connection = null;
+			HttpURLConnection connection = null;
 
 			try {
 
-				connection = url.openConnection();
+				connection = (HttpURLConnection)url.openConnection();
+				
 				connection.setConnectTimeout(5000);
 				connection.setReadTimeout(30000);
 				connection.setDoOutput(true);
@@ -1070,7 +1075,11 @@ public class BookScannerActivity extends Activity implements
 
 				((HttpURLConnection) connection).setRequestProperty(
 						"Authorization", basicAuthHeader);
-				String postData = createJSON095(data);
+				String postData = null;
+				if (activity.version == TCAPIVersion.TinCan095)
+					postData = createJSON095(data);
+				else if (activity.version == TCAPIVersion.TinCan090)
+					postData = createJSON090(data);
 				
 				Log.i("DATA LENGTH", postData.getBytes("UTF-8").length + "");
 
@@ -1080,7 +1089,8 @@ public class BookScannerActivity extends Activity implements
 							"application/json");
 					connection.setRequestProperty("Content-Length", ""
 							+ Integer.toString(postData.getBytes("UTF-8").length));
-					connection.setRequestProperty("X-Experience-API-Version", "0.95");
+					if (activity.version == TCAPIVersion.TinCan095)
+						connection.setRequestProperty("X-Experience-API-Version", "0.95");
 					DataOutputStream wr = new DataOutputStream(
 							connection.getOutputStream());
 					try {
@@ -1092,6 +1102,14 @@ public class BookScannerActivity extends Activity implements
 						wr.close();
 					}
 				}
+				final int response = connection.getResponseCode();
+				if (activity.version == TCAPIVersion.TinCan095){
+					if (response == 400) {
+						activity.version = TCAPIVersion.TinCan090;
+						versionChanged = true;
+						return data;
+					}
+				}
 				responseStream = connection.getInputStream();
 
 				bufferedCopyStream(responseStream, responseBytes);
@@ -1100,7 +1118,8 @@ public class BookScannerActivity extends Activity implements
 				publishProgress(new String(responseBytes.toByteArray(), "UTF-8"));
 				data.setSuccessfullyUploaded(true);
 				return data;
-			} catch (IOException ioe) {
+			} 
+			catch (IOException ioe) {
 				ioe.printStackTrace();
 				try {
 					// publishProgress(ioe.getMessage() + " -> " + readStreamAsString(((HttpURLConnection) connection).getErrorStream()));
@@ -1145,6 +1164,10 @@ public class BookScannerActivity extends Activity implements
 		@Override
 		protected void onPostExecute(Book result) {
 			super.onPostExecute(result);
+			if (versionChanged) {
+				versionChanged = false;
+				result = doInBackground(result);
+			}
 			if (result.isSuccessfullyUploaded()) {
 				Toast.makeText(activity.getApplicationContext(), 
 						R.string.successfulUpload,
@@ -1266,5 +1289,10 @@ public class BookScannerActivity extends Activity implements
 		boolean isConfiguring;
 		String userEmail;
 		String userName;
+	}
+	
+	enum TCAPIVersion {
+		TinCan090,
+		TinCan095,
 	}
 }
