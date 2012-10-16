@@ -34,6 +34,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+//import com.google.zxing.client.android.camera.CameraManager;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -668,6 +670,7 @@ public class BookScannerActivity extends Activity implements
 		if (v.getId() == R.id.buttonScan) {
 			if (metadataGetter == null) {
 				Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+				//intent.setPackage("com.google.zxing.client.android");
 				// Intent intent = new Intent("SCAN");
 				intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
 				startActivityForResult(intent, SCANNER_INTENT);

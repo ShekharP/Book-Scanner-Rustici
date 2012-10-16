@@ -47,6 +47,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.google.zxing.client.android.HelpActivity"
+        >
+        </activity>
+        <activity
             android:name=".BookViewerActivity"
             android:label="@string/app_name" >
         </activity>
